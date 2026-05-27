@@ -1,0 +1,38 @@
+# dependencies
+node_modules/
+
+# builds
+dist/
+build/
+
+# env
+.env
+.env.local
+.env*.local
+
+# mac
+.DS_Store
+
+# logs
+npm-debug.log*
+
+# zip files
+*.zip
+
+# python
+__pycache__/
+*.pyc
+
+# vscode
+.vscode/
+
+# firebase
+.firebase/
+
+# vercel
+.vercel/
+
+# next/v0
+.next/
+.v0-trash/
+.snowflake/

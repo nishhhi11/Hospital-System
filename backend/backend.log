@@ -1,0 +1,309 @@
+ * Restarting with stat
+ * Debugger is active!
+ * Debugger PIN: 938-425-448
+(53881) wsgi starting up on http://0.0.0.0:5000
+(53881) accepted ('127.0.0.1', 64059)
+127.0.0.1 - - [18/May/2026 02:40:28] "GET /socket.io/?EIO=4&transport=polling&t=9rgwkiqj HTTP/1.1" 200 352 0.001728
+127.0.0.1 - - [18/May/2026 02:40:28] "POST /socket.io/?EIO=4&transport=polling&t=9rgwsk2l&sid=nNpc3Tu6SNFmSEfHAAAA HTTP/1.1" 200 219 0.001703
+(53881) accepted ('127.0.0.1', 64062)
+(53881) accepted ('127.0.0.1', 64063)
+127.0.0.1 - - [18/May/2026 02:40:28] "GET /socket.io/?EIO=4&transport=polling&t=9rgwvdoq&sid=nNpc3Tu6SNFmSEfHAAAA HTTP/1.1" 200 233 0.000137
+127.0.0.1 - - [18/May/2026 02:40:28] "GET /socket.io/?EIO=4&transport=polling&t=9rgwyqdz&sid=nNpc3Tu6SNFmSEfHAAAA HTTP/1.1" 200 233 0.000135
+(53881) accepted ('127.0.0.1', 64072)
+127.0.0.1 - - [18/May/2026 02:40:36] "GET /api/patients HTTP/1.1" 200 142 0.005347
+127.0.0.1 - - [18/May/2026 02:40:49] "GET /api/patients HTTP/1.1" 200 200 0.010561
+127.0.0.1 - - [18/May/2026 02:40:49] "GET /api/beds HTTP/1.1" 200 3667 0.008430
+(53881) accepted ('127.0.0.1', 64083)
+(53881) accepted ('127.0.0.1', 64085)
+(53881) accepted ('127.0.0.1', 64086)
+127.0.0.1 - - [18/May/2026 02:40:49] "GET /api/alerts HTTP/1.1" 200 200 0.005807
+127.0.0.1 - - [18/May/2026 02:40:49] "GET /api/dsa/avl HTTP/1.1" 200 202 0.004781
+127.0.0.1 - - [18/May/2026 02:40:49] "GET /api/events HTTP/1.1" 200 2524 0.004354
+127.0.0.1 - - [18/May/2026 02:41:49] "GET /api/patients HTTP/1.1" 200 200 0.012126
+127.0.0.1 - - [18/May/2026 02:41:49] "GET /api/beds HTTP/1.1" 200 3667 0.008359
+127.0.0.1 - - [18/May/2026 02:41:49] "GET /api/alerts HTTP/1.1" 200 200 0.005817
+127.0.0.1 - - [18/May/2026 02:41:49] "GET /api/dsa/avl HTTP/1.1" 200 202 0.004928
+127.0.0.1 - - [18/May/2026 02:41:49] "GET /api/events HTTP/1.1" 200 2524 0.004455
+127.0.0.1 - - [18/May/2026 02:42:49] "GET /api/patients HTTP/1.1" 200 200 0.005334
+127.0.0.1 - - [18/May/2026 02:42:49] "GET /api/beds HTTP/1.1" 200 3667 0.004050
+127.0.0.1 - - [18/May/2026 02:42:49] "GET /api/alerts HTTP/1.1" 200 200 0.003389
+127.0.0.1 - - [18/May/2026 02:42:49] "GET /api/dsa/avl HTTP/1.1" 200 202 0.003673
+127.0.0.1 - - [18/May/2026 02:42:49] "GET /api/events HTTP/1.1" 200 2524 0.003268
+127.0.0.1 - - [18/May/2026 02:43:49] "GET /api/patients HTTP/1.1" 200 200 0.010499
+127.0.0.1 - - [18/May/2026 02:43:49] "GET /api/beds HTTP/1.1" 200 3667 0.008919
+127.0.0.1 - - [18/May/2026 02:43:49] "GET /api/alerts HTTP/1.1" 200 200 0.006088
+127.0.0.1 - - [18/May/2026 02:43:49] "GET /api/dsa/avl HTTP/1.1" 200 202 0.004618
+127.0.0.1 - - [18/May/2026 02:43:49] "GET /api/events HTTP/1.1" 200 2524 0.004329
+127.0.0.1 - - [18/May/2026 02:44:20] "GET /api/patients HTTP/1.1" 200 200 0.008411
+127.0.0.1 - - [18/May/2026 02:44:20] "GET /api/beds HTTP/1.1" 200 3667 0.005749
+127.0.0.1 - - [18/May/2026 02:44:20] "GET /api/alerts HTTP/1.1" 200 200 0.006958
+127.0.0.1 - - [18/May/2026 02:44:20] "GET /api/dsa/avl HTTP/1.1" 200 202 0.013307
+127.0.0.1 - - [18/May/2026 02:44:20] "GET /api/events HTTP/1.1" 200 2524 0.022133
+127.0.0.1 - - [18/May/2026 02:44:21] "GET /api/patients HTTP/1.1" 200 200 0.011943
+127.0.0.1 - - [18/May/2026 02:44:21] "GET /api/beds HTTP/1.1" 200 3667 0.009259
+127.0.0.1 - - [18/May/2026 02:44:22] "GET /api/alerts HTTP/1.1" 200 200 0.006457
+127.0.0.1 - - [18/May/2026 02:44:22] "GET /api/dsa/avl HTTP/1.1" 200 202 0.004086
+127.0.0.1 - - [18/May/2026 02:44:22] "GET /api/events HTTP/1.1" 200 2524 0.003683
+127.0.0.1 - - [18/May/2026 02:44:22] "GET /socket.io/?EIO=4&transport=websocket&sid=nNpc3Tu6SNFmSEfHAAAA HTTP/1.1" 200 0 233.911115
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /api/patients HTTP/1.1" 200 200 0.010472
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /api/beds HTTP/1.1" 200 3667 0.008936
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /api/alerts HTTP/1.1" 200 200 0.006165
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /api/dsa/avl HTTP/1.1" 200 202 0.007417
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /api/events HTTP/1.1" 200 2524 0.005385
+(53881) accepted ('127.0.0.1', 64187)
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /socket.io/?EIO=4&transport=polling&t=9wj499u7 HTTP/1.1" 200 352 0.000220
+127.0.0.1 - - [18/May/2026 02:44:24] "POST /socket.io/?EIO=4&transport=polling&t=9wj5jqt7&sid=v9abQ0xLSl7xCXeLAAAC HTTP/1.1" 200 219 0.000590
+(53881) accepted ('127.0.0.1', 64189)
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /socket.io/?EIO=4&transport=polling&t=9wj5kczo&sid=v9abQ0xLSl7xCXeLAAAC HTTP/1.1" 200 233 0.000098
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /socket.io/?EIO=4&transport=polling&t=9wj5u0fc&sid=v9abQ0xLSl7xCXeLAAAC HTTP/1.1" 200 233 0.000099
+127.0.0.1 - - [18/May/2026 02:44:24] "GET /socket.io/?EIO=4&transport=polling&t=9wj6nju0&sid=v9abQ0xLSl7xCXeLAAAC HTTP/1.1" 200 233 0.000072
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/patients HTTP/1.1" 200 200 0.010867
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/beds HTTP/1.1" 200 3667 0.010396
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/alerts HTTP/1.1" 200 200 0.007001
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/dsa/avl HTTP/1.1" 200 202 0.004577
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/events HTTP/1.1" 200 2524 0.004455
+127.0.0.1 - - [18/May/2026 02:44:34] "OPTIONS /api/patients HTTP/1.1" 200 358 0.000708
+127.0.0.1 - - [18/May/2026 02:44:34] "POST /api/patients HTTP/1.1" 200 224 0.006206
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/patients HTTP/1.1" 200 547 0.004601
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/beds HTTP/1.1" 200 3674 0.004449
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/alerts HTTP/1.1" 200 200 0.003620
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/dsa/avl HTTP/1.1" 200 319 0.004267
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/events HTTP/1.1" 200 2524 0.003327
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/patients HTTP/1.1" 200 547 0.003508
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/beds HTTP/1.1" 200 3674 0.003370
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/alerts HTTP/1.1" 200 200 0.003731
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/dsa/avl HTTP/1.1" 200 319 0.003152
+127.0.0.1 - - [18/May/2026 02:44:34] "GET /api/events HTTP/1.1" 200 2524 0.002935
+127.0.0.1 - - [18/May/2026 02:44:35] "GET /api/dsa/stack HTTP/1.1" 200 276 0.005476
+127.0.0.1 - - [18/May/2026 02:44:35] "GET /api/dsa/stack HTTP/1.1" 200 276 0.004505
+127.0.0.1 - - [18/May/2026 02:44:38] "GET /api/dsa/stack HTTP/1.1" 200 276 0.006668
+127.0.0.1 - - [18/May/2026 02:44:38] "GET /api/dsa/stack HTTP/1.1" 200 276 0.004112
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /socket.io/?EIO=4&transport=websocket&sid=v9abQ0xLSl7xCXeLAAAC HTTP/1.1" 200 0 17.393720
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /api/patients HTTP/1.1" 200 547 0.006908
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /api/beds HTTP/1.1" 200 3674 0.006461
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /api/alerts HTTP/1.1" 200 200 0.004826
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /api/dsa/avl HTTP/1.1" 200 319 0.003548
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /api/events HTTP/1.1" 200 2524 0.007465
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /socket.io/?EIO=4&transport=polling&t=9wx9g64y HTTP/1.1" 200 352 0.000229
+127.0.0.1 - - [18/May/2026 02:44:42] "POST /socket.io/?EIO=4&transport=polling&t=9wxafzkk&sid=v5lcS8VcqS6HAyhxAAAE HTTP/1.1" 200 219 0.000900
+(53881) accepted ('127.0.0.1', 64202)
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /socket.io/?EIO=4&transport=polling&t=9wxaf1mo&sid=v5lcS8VcqS6HAyhxAAAE HTTP/1.1" 200 265 0.000105
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /socket.io/?EIO=4&transport=polling&t=9wxaiijo&sid=v5lcS8VcqS6HAyhxAAAE HTTP/1.1" 200 233 0.000102
+127.0.0.1 - - [18/May/2026 02:44:42] "GET /socket.io/?EIO=4&transport=polling&t=9wxajsii&sid=v5lcS8VcqS6HAyhxAAAE HTTP/1.1" 200 233 0.000068
+127.0.0.1 - - [18/May/2026 02:44:53] "GET /api/patients HTTP/1.1" 200 547 0.010601
+127.0.0.1 - - [18/May/2026 02:44:53] "GET /api/beds HTTP/1.1" 200 3674 0.006508
+127.0.0.1 - - [18/May/2026 02:44:53] "GET /api/alerts HTTP/1.1" 200 200 0.004780
+127.0.0.1 - - [18/May/2026 02:44:53] "GET /api/dsa/avl HTTP/1.1" 200 319 0.004098
+127.0.0.1 - - [18/May/2026 02:44:53] "GET /api/events HTTP/1.1" 200 2524 0.003876
+127.0.0.1 - - [18/May/2026 02:44:57] "GET /socket.io/?EIO=4&transport=websocket&sid=v5lcS8VcqS6HAyhxAAAE HTTP/1.1" 200 0 14.786661
+(53881) accepted ('127.0.0.1', 57553)
+(53881) accepted ('127.0.0.1', 57555)
+(53881) accepted ('127.0.0.1', 57557)
+(53881) accepted ('127.0.0.1', 57559)
+127.0.0.1 - - [18/May/2026 13:32:20] "GET /api/patients HTTP/1.1" 200 547 0.015394
+127.0.0.1 - - [18/May/2026 13:32:20] "GET /api/beds HTTP/1.1" 200 3674 0.009999
+127.0.0.1 - - [18/May/2026 13:32:20] "GET /api/alerts HTTP/1.1" 200 200 0.007661
+127.0.0.1 - - [18/May/2026 13:32:20] "GET /api/dsa/avl HTTP/1.1" 200 319 0.007039
+(53881) accepted ('127.0.0.1', 57561)
+(53881) accepted ('127.0.0.1', 57562)
+127.0.0.1 - - [18/May/2026 13:32:21] "GET /api/events HTTP/1.1" 200 2524 0.005757
+127.0.0.1 - - [18/May/2026 13:32:21] "GET /socket.io/?EIO=4&transport=polling&t=x1sba73g HTTP/1.1" 200 352 0.000278
+127.0.0.1 - - [18/May/2026 13:32:21] "POST /socket.io/?EIO=4&transport=polling&t=x1sd2ojz&sid=XdeNwE0UXKJjCgGEAAAG HTTP/1.1" 200 219 0.001904
+127.0.0.1 - - [18/May/2026 13:32:21] "GET /socket.io/?EIO=4&transport=polling&t=x1sd37u4&sid=XdeNwE0UXKJjCgGEAAAG HTTP/1.1" 200 265 0.000083
+(53881) accepted ('127.0.0.1', 57564)
+127.0.0.1 - - [18/May/2026 13:32:21] "GET /socket.io/?EIO=4&transport=polling&t=x1sd7cnl&sid=XdeNwE0UXKJjCgGEAAAG HTTP/1.1" 200 233 0.000206
+127.0.0.1 - - [18/May/2026 13:32:21] "GET /socket.io/?EIO=4&transport=polling&t=x1sd9a3x&sid=XdeNwE0UXKJjCgGEAAAG HTTP/1.1" 200 233 0.000169
+127.0.0.1 - - [18/May/2026 13:32:21] "GET /socket.io/?EIO=4&transport=polling&t=x1sdbxyq&sid=XdeNwE0UXKJjCgGEAAAG HTTP/1.1" 200 233 0.000120
+127.0.0.1 - - [18/May/2026 13:32:26] "GET /socket.io/?EIO=4&transport=websocket&sid=XdeNwE0UXKJjCgGEAAAG HTTP/1.1" 200 0 5.846156
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /api/patients HTTP/1.1" 200 547 0.012562
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /api/beds HTTP/1.1" 200 3674 0.009224
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /api/alerts HTTP/1.1" 200 200 0.005403
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /api/dsa/avl HTTP/1.1" 200 319 0.006630
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /api/events HTTP/1.1" 200 2524 0.005294
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /socket.io/?EIO=4&transport=polling&t=x1xxuzfm HTTP/1.1" 200 352 0.000246
+127.0.0.1 - - [18/May/2026 13:32:28] "POST /socket.io/?EIO=4&transport=polling&t=x1xz957n&sid=uhfQHEPeac6nJHncAAAI HTTP/1.1" 200 219 0.000633
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /socket.io/?EIO=4&transport=polling&t=x1xz9pq6&sid=uhfQHEPeac6nJHncAAAI HTTP/1.1" 200 265 0.000070
+(53881) accepted ('127.0.0.1', 57594)
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /socket.io/?EIO=4&transport=polling&t=x1xzj26i&sid=uhfQHEPeac6nJHncAAAI HTTP/1.1" 200 233 0.000129
+127.0.0.1 - - [18/May/2026 13:32:28] "GET /socket.io/?EIO=4&transport=polling&t=x1xzl69b&sid=uhfQHEPeac6nJHncAAAI HTTP/1.1" 200 233 0.000147
+127.0.0.1 - - [18/May/2026 13:32:34] "GET /api/dsa/stack HTTP/1.1" 200 276 0.006656
+127.0.0.1 - - [18/May/2026 13:32:34] "GET /api/dsa/stack HTTP/1.1" 200 276 0.004101
+127.0.0.1 - - [18/May/2026 13:32:38] "GET /api/patients HTTP/1.1" 200 547 0.007605
+127.0.0.1 - - [18/May/2026 13:32:38] "GET /api/beds HTTP/1.1" 200 3674 0.005442
+127.0.0.1 - - [18/May/2026 13:32:38] "GET /api/alerts HTTP/1.1" 200 200 0.005427
+127.0.0.1 - - [18/May/2026 13:32:38] "GET /api/dsa/avl HTTP/1.1" 200 319 0.003366
+127.0.0.1 - - [18/May/2026 13:32:38] "GET /api/events HTTP/1.1" 200 2524 0.003096
+127.0.0.1 - - [18/May/2026 13:32:39] "GET /socket.io/?EIO=4&transport=websocket&sid=uhfQHEPeac6nJHncAAAI HTTP/1.1" 200 0 10.801385
+(53881) accepted ('127.0.0.1', 59816)
+(53881) accepted ('127.0.0.1', 59819)
+(53881) accepted ('127.0.0.1', 59821)
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /api/patients HTTP/1.1" 200 547 0.015144
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /api/beds HTTP/1.1" 200 3674 0.012397
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /api/alerts HTTP/1.1" 200 200 0.009297
+(53881) accepted ('127.0.0.1', 59823)
+(53881) accepted ('127.0.0.1', 59824)
+(53881) accepted ('127.0.0.1', 59826)
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /api/dsa/avl HTTP/1.1" 200 319 0.008124
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /api/events HTTP/1.1" 200 2524 0.006818
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /socket.io/?EIO=4&transport=polling&t=xyox37jl HTTP/1.1" 200 352 0.000536
+127.0.0.1 - - [18/May/2026 13:57:56] "POST /socket.io/?EIO=4&transport=polling&t=xyoyuyqg&sid=O-mmn5U7f4qlHW7bAAAK HTTP/1.1" 200 219 0.001203
+(53881) accepted ('127.0.0.1', 59829)
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /socket.io/?EIO=4&transport=polling&t=xyoyvglm&sid=O-mmn5U7f4qlHW7bAAAK HTTP/1.1" 200 265 0.000094
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /socket.io/?EIO=4&transport=polling&t=xyoyzyiv&sid=O-mmn5U7f4qlHW7bAAAK HTTP/1.1" 200 233 0.000168
+127.0.0.1 - - [18/May/2026 13:57:56] "GET /socket.io/?EIO=4&transport=polling&t=xyoz2ekf&sid=O-mmn5U7f4qlHW7bAAAK HTTP/1.1" 200 233 0.000224
+127.0.0.1 - - [18/May/2026 13:58:06] "GET /api/patients HTTP/1.1" 200 547 0.013510
+127.0.0.1 - - [18/May/2026 13:58:06] "GET /api/beds HTTP/1.1" 200 3674 0.012094
+127.0.0.1 - - [18/May/2026 13:58:06] "GET /api/alerts HTTP/1.1" 200 200 0.007892
+127.0.0.1 - - [18/May/2026 13:58:06] "GET /api/dsa/avl HTTP/1.1" 200 319 0.007004
+127.0.0.1 - - [18/May/2026 13:58:06] "GET /api/events HTTP/1.1" 200 2524 0.005796
+127.0.0.1 - - [18/May/2026 13:58:16] "GET /api/patients HTTP/1.1" 200 547 0.004178
+127.0.0.1 - - [18/May/2026 13:58:16] "GET /api/beds HTTP/1.1" 200 3674 0.003694
+127.0.0.1 - - [18/May/2026 13:58:16] "GET /api/alerts HTTP/1.1" 200 200 0.003090
+127.0.0.1 - - [18/May/2026 13:58:16] "GET /api/dsa/avl HTTP/1.1" 200 319 0.002658
+127.0.0.1 - - [18/May/2026 13:58:16] "GET /api/events HTTP/1.1" 200 2524 0.003272
+127.0.0.1 - - [18/May/2026 13:58:26] "GET /api/patients HTTP/1.1" 200 547 0.012494
+127.0.0.1 - - [18/May/2026 13:58:26] "GET /api/beds HTTP/1.1" 200 3674 0.007123
+127.0.0.1 - - [18/May/2026 13:58:26] "GET /api/alerts HTTP/1.1" 200 200 0.007882
+127.0.0.1 - - [18/May/2026 13:58:26] "GET /api/dsa/avl HTTP/1.1" 200 319 0.005737
+127.0.0.1 - - [18/May/2026 13:58:26] "GET /api/events HTTP/1.1" 200 2524 0.004737
+127.0.0.1 - - [18/May/2026 13:58:36] "GET /api/patients HTTP/1.1" 200 547 0.007636
+127.0.0.1 - - [18/May/2026 13:58:36] "GET /api/beds HTTP/1.1" 200 3674 0.006741
+127.0.0.1 - - [18/May/2026 13:58:36] "GET /api/alerts HTTP/1.1" 200 200 0.006349
+127.0.0.1 - - [18/May/2026 13:58:36] "GET /api/dsa/avl HTTP/1.1" 200 319 0.004857
+127.0.0.1 - - [18/May/2026 13:58:36] "GET /api/events HTTP/1.1" 200 2524 0.003500
+127.0.0.1 - - [18/May/2026 13:58:46] "GET /api/patients HTTP/1.1" 200 547 0.011057
+127.0.0.1 - - [18/May/2026 13:58:46] "GET /api/beds HTTP/1.1" 200 3674 0.008252
+127.0.0.1 - - [18/May/2026 13:58:46] "GET /api/alerts HTTP/1.1" 200 200 0.006370
+127.0.0.1 - - [18/May/2026 13:58:46] "GET /api/dsa/avl HTTP/1.1" 200 319 0.004111
+127.0.0.1 - - [18/May/2026 13:58:46] "GET /api/events HTTP/1.1" 200 2524 0.004937
+127.0.0.1 - - [18/May/2026 13:58:56] "GET /api/patients HTTP/1.1" 200 547 0.006824
+127.0.0.1 - - [18/May/2026 13:58:56] "GET /api/beds HTTP/1.1" 200 3674 0.006099
+127.0.0.1 - - [18/May/2026 13:58:56] "GET /api/alerts HTTP/1.1" 200 200 0.005466
+127.0.0.1 - - [18/May/2026 13:58:56] "GET /api/dsa/avl HTTP/1.1" 200 319 0.005407
+127.0.0.1 - - [18/May/2026 13:58:56] "GET /api/events HTTP/1.1" 200 2524 0.003819
+127.0.0.1 - - [18/May/2026 13:59:18] "GET /api/patients HTTP/1.1" 200 547 0.008046
+127.0.0.1 - - [18/May/2026 13:59:18] "GET /api/beds HTTP/1.1" 200 3674 0.005538
+127.0.0.1 - - [18/May/2026 13:59:18] "GET /api/alerts HTTP/1.1" 200 200 0.005396
+127.0.0.1 - - [18/May/2026 13:59:18] "GET /api/dsa/avl HTTP/1.1" 200 319 0.005205
+127.0.0.1 - - [18/May/2026 13:59:18] "GET /api/events HTTP/1.1" 200 2524 0.003906
+127.0.0.1 - - [18/May/2026 13:59:28] "GET /api/patients HTTP/1.1" 200 547 0.006641
+127.0.0.1 - - [18/May/2026 13:59:28] "GET /api/beds HTTP/1.1" 200 3674 0.007909
+127.0.0.1 - - [18/May/2026 13:59:28] "GET /api/alerts HTTP/1.1" 200 200 0.005945
+127.0.0.1 - - [18/May/2026 13:59:28] "GET /api/dsa/avl HTTP/1.1" 200 319 0.014289
+127.0.0.1 - - [18/May/2026 13:59:28] "GET /api/events HTTP/1.1" 200 2524 0.007796
+127.0.0.1 - - [18/May/2026 13:59:36] "GET /api/patients HTTP/1.1" 200 547 0.011662
+127.0.0.1 - - [18/May/2026 13:59:36] "GET /api/beds HTTP/1.1" 200 3674 0.009698
+127.0.0.1 - - [18/May/2026 13:59:36] "GET /api/alerts HTTP/1.1" 200 200 0.007871
+127.0.0.1 - - [18/May/2026 13:59:36] "GET /api/dsa/avl HTTP/1.1" 200 319 0.006409
+127.0.0.1 - - [18/May/2026 13:59:36] "GET /api/events HTTP/1.1" 200 2524 0.005304
+127.0.0.1 - - [18/May/2026 13:59:46] "GET /api/patients HTTP/1.1" 200 547 0.012376
+127.0.0.1 - - [18/May/2026 13:59:46] "GET /api/beds HTTP/1.1" 200 3674 0.009347
+127.0.0.1 - - [18/May/2026 13:59:46] "GET /api/alerts HTTP/1.1" 200 200 0.007952
+127.0.0.1 - - [18/May/2026 13:59:46] "GET /api/dsa/avl HTTP/1.1" 200 319 0.005767
+127.0.0.1 - - [18/May/2026 13:59:46] "GET /api/events HTTP/1.1" 200 2524 0.003925
+127.0.0.1 - - [18/May/2026 13:59:56] "GET /api/patients HTTP/1.1" 200 547 0.013239
+127.0.0.1 - - [18/May/2026 13:59:56] "GET /api/beds HTTP/1.1" 200 3674 0.009312
+127.0.0.1 - - [18/May/2026 13:59:56] "GET /api/alerts HTTP/1.1" 200 200 0.008603
+127.0.0.1 - - [18/May/2026 13:59:56] "GET /api/dsa/avl HTTP/1.1" 200 319 0.005907
+127.0.0.1 - - [18/May/2026 13:59:56] "GET /api/events HTTP/1.1" 200 2524 0.005381
+127.0.0.1 - - [18/May/2026 14:00:06] "GET /api/patients HTTP/1.1" 200 547 0.011035
+127.0.0.1 - - [18/May/2026 14:00:06] "GET /api/beds HTTP/1.1" 200 3674 0.009677
+127.0.0.1 - - [18/May/2026 14:00:06] "GET /api/alerts HTTP/1.1" 200 200 0.009605
+127.0.0.1 - - [18/May/2026 14:00:06] "GET /api/dsa/avl HTTP/1.1" 200 319 0.006710
+127.0.0.1 - - [18/May/2026 14:00:06] "GET /api/events HTTP/1.1" 200 2524 0.005621
+127.0.0.1 - - [18/May/2026 14:00:16] "GET /api/patients HTTP/1.1" 200 547 0.008493
+127.0.0.1 - - [18/May/2026 14:00:16] "GET /api/beds HTTP/1.1" 200 3674 0.006375
+127.0.0.1 - - [18/May/2026 14:00:16] "GET /api/alerts HTTP/1.1" 200 200 0.008698
+127.0.0.1 - - [18/May/2026 14:00:16] "GET /api/dsa/avl HTTP/1.1" 200 319 0.007550
+127.0.0.1 - - [18/May/2026 14:00:16] "GET /api/events HTTP/1.1" 200 2524 0.005031
+127.0.0.1 - - [18/May/2026 14:00:26] "GET /api/patients HTTP/1.1" 200 547 0.010735
+127.0.0.1 - - [18/May/2026 14:00:26] "GET /api/beds HTTP/1.1" 200 3674 0.009063
+127.0.0.1 - - [18/May/2026 14:00:26] "GET /api/alerts HTTP/1.1" 200 200 0.007345
+127.0.0.1 - - [18/May/2026 14:00:26] "GET /api/dsa/avl HTTP/1.1" 200 319 0.006278
+127.0.0.1 - - [18/May/2026 14:00:26] "GET /api/events HTTP/1.1" 200 2524 0.005376
+127.0.0.1 - - [18/May/2026 14:01:13] "GET /socket.io/?EIO=4&transport=websocket&sid=O-mmn5U7f4qlHW7bAAAK HTTP/1.1" 200 0 196.733115
+(53881) accepted ('127.0.0.1', 61235)
+(53881) accepted ('127.0.0.1', 61237)
+(53881) accepted ('127.0.0.1', 61239)
+(53881) accepted ('127.0.0.1', 61240)
+(53881) accepted ('127.0.0.1', 61242)
+(53881) accepted ('127.0.0.1', 61244)
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /api/patients HTTP/1.1" 200 547 0.014307
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /api/beds HTTP/1.1" 200 3674 0.010417
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /api/alerts HTTP/1.1" 200 200 0.007702
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /api/dsa/avl HTTP/1.1" 200 319 0.005702
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /api/events HTTP/1.1" 200 2524 0.005314
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /socket.io/?EIO=4&transport=polling&t=zqzw1iqo HTTP/1.1" 200 352 0.000267
+127.0.0.1 - - [18/May/2026 14:47:56] "POST /socket.io/?EIO=4&transport=polling&t=zqzxnaps&sid=1ugb3CxrCsDxdCFTAAAM HTTP/1.1" 200 219 0.002026
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /socket.io/?EIO=4&transport=polling&t=zqzxoj26&sid=1ugb3CxrCsDxdCFTAAAM HTTP/1.1" 200 265 0.000161
+(53881) accepted ('127.0.0.1', 61246)
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /socket.io/?EIO=4&transport=polling&t=zqzxsrel&sid=1ugb3CxrCsDxdCFTAAAM HTTP/1.1" 200 233 0.000080
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /socket.io/?EIO=4&transport=polling&t=zqzxum52&sid=1ugb3CxrCsDxdCFTAAAM HTTP/1.1" 200 233 0.000197
+127.0.0.1 - - [18/May/2026 14:47:56] "GET /socket.io/?EIO=4&transport=polling&t=zqzxznbj&sid=1ugb3CxrCsDxdCFTAAAM HTTP/1.1" 200 233 0.000102
+127.0.0.1 - - [18/May/2026 14:48:06] "GET /api/patients HTTP/1.1" 200 547 0.010375
+127.0.0.1 - - [18/May/2026 14:48:06] "GET /api/beds HTTP/1.1" 200 3674 0.009683
+127.0.0.1 - - [18/May/2026 14:48:06] "GET /api/alerts HTTP/1.1" 200 200 0.007529
+127.0.0.1 - - [18/May/2026 14:48:06] "GET /api/dsa/avl HTTP/1.1" 200 319 0.008280
+127.0.0.1 - - [18/May/2026 14:48:06] "GET /api/events HTTP/1.1" 200 2524 0.005349
+127.0.0.1 - - [18/May/2026 14:48:16] "GET /api/patients HTTP/1.1" 200 547 0.011930
+127.0.0.1 - - [18/May/2026 14:48:16] "GET /api/beds HTTP/1.1" 200 3674 0.010446
+127.0.0.1 - - [18/May/2026 14:48:16] "GET /api/alerts HTTP/1.1" 200 200 0.009067
+127.0.0.1 - - [18/May/2026 14:48:16] "GET /api/dsa/avl HTTP/1.1" 200 319 0.007375
+127.0.0.1 - - [18/May/2026 14:48:16] "GET /api/events HTTP/1.1" 200 2524 0.006648
+127.0.0.1 - - [18/May/2026 14:48:20] "OPTIONS /api/patients HTTP/1.1" 200 358 0.000793
+127.0.0.1 - - [18/May/2026 14:48:20] "POST /api/patients HTTP/1.1" 200 224 0.009561
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/patients HTTP/1.1" 200 891 0.008163
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/beds HTTP/1.1" 200 3680 0.006157
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/alerts HTTP/1.1" 200 200 0.004216
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/dsa/avl HTTP/1.1" 200 447 0.004864
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/events HTTP/1.1" 200 2524 0.003398
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/patients HTTP/1.1" 200 891 0.003737
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/beds HTTP/1.1" 200 3680 0.004330
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/alerts HTTP/1.1" 200 200 0.004052
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/dsa/avl HTTP/1.1" 200 447 0.003084
+127.0.0.1 - - [18/May/2026 14:48:20] "GET /api/events HTTP/1.1" 200 2524 0.002951
+127.0.0.1 - - [18/May/2026 14:48:26] "GET /api/patients HTTP/1.1" 200 891 0.011290
+127.0.0.1 - - [18/May/2026 14:48:26] "GET /api/beds HTTP/1.1" 200 3680 0.011768
+127.0.0.1 - - [18/May/2026 14:48:26] "GET /api/alerts HTTP/1.1" 200 200 0.009223
+127.0.0.1 - - [18/May/2026 14:48:26] "GET /api/dsa/avl HTTP/1.1" 200 447 0.008139
+127.0.0.1 - - [18/May/2026 14:48:26] "GET /api/events HTTP/1.1" 200 2524 0.005869
+127.0.0.1 - - [18/May/2026 14:48:36] "GET /api/patients HTTP/1.1" 200 891 0.013593
+127.0.0.1 - - [18/May/2026 14:48:36] "GET /api/beds HTTP/1.1" 200 3680 0.007883
+127.0.0.1 - - [18/May/2026 14:48:36] "GET /api/alerts HTTP/1.1" 200 200 0.005378
+127.0.0.1 - - [18/May/2026 14:48:36] "GET /api/dsa/avl HTTP/1.1" 200 447 0.004681
+127.0.0.1 - - [18/May/2026 14:48:36] "GET /api/events HTTP/1.1" 200 2524 0.003985
+127.0.0.1 - - [18/May/2026 14:48:42] "GET /api/dsa/stack HTTP/1.1" 200 351 0.008562
+127.0.0.1 - - [18/May/2026 14:48:42] "GET /api/dsa/stack HTTP/1.1" 200 351 0.009537
+127.0.0.1 - - [18/May/2026 14:48:46] "GET /api/patients HTTP/1.1" 200 891 0.009790
+127.0.0.1 - - [18/May/2026 14:48:46] "GET /api/beds HTTP/1.1" 200 3680 0.010772
+127.0.0.1 - - [18/May/2026 14:48:46] "GET /api/alerts HTTP/1.1" 200 200 0.009350
+127.0.0.1 - - [18/May/2026 14:48:46] "GET /api/dsa/avl HTTP/1.1" 200 447 0.007682
+127.0.0.1 - - [18/May/2026 14:48:46] "GET /api/events HTTP/1.1" 200 2524 0.006511
+127.0.0.1 - - [18/May/2026 14:48:46] "GET /api/dsa/stack HTTP/1.1" 200 351 0.007484
+127.0.0.1 - - [18/May/2026 14:48:48] "GET /api/dsa/stack HTTP/1.1" 200 351 0.012740
+127.0.0.1 - - [18/May/2026 14:48:48] "GET /api/dsa/stack HTTP/1.1" 200 351 0.011129
+127.0.0.1 - - [18/May/2026 14:48:56] "GET /api/patients HTTP/1.1" 200 891 0.010020
+127.0.0.1 - - [18/May/2026 14:48:56] "GET /api/beds HTTP/1.1" 200 3680 0.010329
+127.0.0.1 - - [18/May/2026 14:48:56] "GET /api/alerts HTTP/1.1" 200 200 0.008938
+127.0.0.1 - - [18/May/2026 14:48:56] "GET /api/dsa/avl HTTP/1.1" 200 447 0.006269
+127.0.0.1 - - [18/May/2026 14:48:56] "GET /api/events HTTP/1.1" 200 2524 0.005056
+127.0.0.1 - - [18/May/2026 14:49:06] "GET /api/patients HTTP/1.1" 200 891 0.011314
+127.0.0.1 - - [18/May/2026 14:49:06] "GET /api/beds HTTP/1.1" 200 3680 0.010763
+127.0.0.1 - - [18/May/2026 14:49:06] "GET /api/alerts HTTP/1.1" 200 200 0.009458
+127.0.0.1 - - [18/May/2026 14:49:06] "GET /api/dsa/avl HTTP/1.1" 200 447 0.006360
+127.0.0.1 - - [18/May/2026 14:49:06] "GET /api/events HTTP/1.1" 200 2524 0.006783
+127.0.0.1 - - [18/May/2026 14:49:17] "GET /api/patients HTTP/1.1" 200 891 0.011035
+127.0.0.1 - - [18/May/2026 14:49:17] "GET /api/beds HTTP/1.1" 200 3680 0.009980
+127.0.0.1 - - [18/May/2026 14:49:17] "GET /api/alerts HTTP/1.1" 200 200 0.008294
+127.0.0.1 - - [18/May/2026 14:49:17] "GET /api/dsa/avl HTTP/1.1" 200 447 0.006396
+127.0.0.1 - - [18/May/2026 14:49:17] "GET /api/events HTTP/1.1" 200 2524 0.005147
+127.0.0.1 - - [18/May/2026 14:49:27] "GET /api/patients HTTP/1.1" 200 891 0.011485
+127.0.0.1 - - [18/May/2026 14:49:27] "GET /api/beds HTTP/1.1" 200 3680 0.009617
+127.0.0.1 - - [18/May/2026 14:49:27] "GET /api/alerts HTTP/1.1" 200 200 0.008611
+127.0.0.1 - - [18/May/2026 14:49:27] "GET /api/dsa/avl HTTP/1.1" 200 447 0.006690
+127.0.0.1 - - [18/May/2026 14:49:27] "GET /api/events HTTP/1.1" 200 2524 0.005221
+127.0.0.1 - - [18/May/2026 14:49:37] "GET /api/patients HTTP/1.1" 200 891 0.011101
+127.0.0.1 - - [18/May/2026 14:49:37] "GET /api/beds HTTP/1.1" 200 3680 0.008823
+127.0.0.1 - - [18/May/2026 14:49:37] "GET /api/alerts HTTP/1.1" 200 200 0.007880
+127.0.0.1 - - [18/May/2026 14:49:37] "GET /api/dsa/avl HTTP/1.1" 200 447 0.006372
+127.0.0.1 - - [18/May/2026 14:49:37] "GET /api/events HTTP/1.1" 200 2524 0.005763
