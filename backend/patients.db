@@ -1,15 +1,10 @@
-P1779052474 "Nishi" 19 F Moderate 02:44 "In Treatment" T-01
-P1779059500 "Arjun Mehta" 45 M Critical 14:48 "Emergency" T-02
-P1779059601 "Sara Khan" 22 F Low 08:15 "Observation" T-03
-P1779059702 "Rohan Verma" 60 M High 21:10 "ICU Transfer" T-04
-P1779059803 "Anaya Singh" 27 F Moderate 10:32 "Under Review" T-05
-P1779059904 "Kabir Sharma" 35 M Critical 18:56 "Surgery Required" T-06
-P1779060005 "Priya Nair" 41 F Low 06:25 "Recovery Phase" T-07
-P1779060106 "Aditya Roy" 50 M High 12:40 "In Treatment" T-08
-P1779060207 "Meera Joshi" 19 F Moderate 09:18 "Observation" T-09
-P1779060308 "Dev Malhotra" 66 M Critical 23:01 "Emergency" T-10
-P1779060409 "Ishita Kapoor" 31 F Low 04:52 "Discharged" T-11
-P1779060510 "Vivaan Patel" 29 M Moderate 16:20 "Under Review" T-12
-P1779060611 "Aarohi Desai" 38 F High 13:37 "ICU Transfer" T-13
-P1779060712 "Kunal Arora" 47 M Critical 19:44 "Surgery Required" T-14
-P1779060813 "Sneha Iyer" 25 F Moderate 07:29 "Recovery Phase" T-15
+P1779878383 "nishi" 30 F Moderate 16:09 "In Treatment" T-01 "headache" "Unassigned" "take rest" "120/80" 72 99 37
+P1779878384 "Arjun Mehta" 45 M Critical 16:14 "Emergency" T-02 "Chest Pain" "Dr. Sharma" "ECG Required" "150/95" 118 92 39
+P1779878385 "Sara Khan" 22 F Low 16:21 "Observation" T-03 "Fever" "Dr. Patel" "Paracetamol" "110/70" 80 98 38
+P1779878386 "Rohan Verma" 61 M High 16:28 "ICU Transfer" T-04 "Breathing Issue" "Dr. Shah" "Oxygen Support" "145/90" 105 88 38
+P1779878387 "Anaya Singh" 27 F Moderate 16:35 "Under Review" T-05 "Migraine" "Unassigned" "Hydration" "118/76" 76 99 37
+P1779878388 "Kabir Sharma" 35 M Critical 16:42 "Surgery Required" T-06 "Internal Injury" "Dr. Mehra" "CT Scan" "160/100" 125 85 39
+P1779878389 "Priya Nair" 41 F Low 16:50 "Recovery Phase" T-07 "Weakness" "Dr. Rao" "Vitamin Dose" "112/74" 74 98 37
+P1779878390 "Aditya Roy" 50 M High 16:57 "In Treatment" T-08 "High BP" "Dr. Khanna" "BP Monitoring" "170/110" 110 91 38
+P1779878391 "Meera Joshi" 19 F Moderate 17:03 "Observation" T-09 "Food Poisoning" "Dr. Shah" "IV Fluids" "108/69" 82 97 37
+P1779878392 "Dev Malhotra" 66 M Critical 17:10 "Emergency" T-10 "Cardiac Arrest" "Dr. Sharma" "CPR" "180/120" 132 79 40

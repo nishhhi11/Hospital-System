@@ -200,10 +200,36 @@ export const useERStore = create<ERStore>((set, get) => ({
     }
   },
 
-  updatePatient: (id, updates) =>
-    set((s) => ({
-      patients: s.patients.map((p) => (p.id === id ? { ...p, ...updates } : p)),
-    })),
+  updatePatient: async (id, updates) => {
+    // Optimistic update
+    const previousPatients = get().patients;
+    let fullPatient: Patient | null = null;
+    
+    set((s) => {
+      const newPatients = s.patients.map((p) => {
+        if (p.id === id) {
+          fullPatient = { ...p, ...updates };
+          return fullPatient as Patient;
+        }
+        return p;
+      });
+      return { patients: newPatients };
+    });
+
+    if (!fullPatient) return;
+
+    try {
+      await fetch(`http://localhost:5000/api/patients/${id}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(fullPatient),
+      });
+      await get().syncWithBackend();
+    } catch (error) {
+      console.error("Update patient sync failed", error);
+      set({ patients: previousPatients }); // Rollback
+    }
+  },
 
   deletePatient: async (id) => {
     // Optimistic update

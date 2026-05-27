@@ -40,8 +40,14 @@ def add_patient():
         data.get('name', 'Unknown'),
         str(data.get('age', 0)),
         data.get('gender', 'M'),
+        data.get('chief_complaint', ''),
         data.get('severity', 'Stable'),
-        data.get('arrival_time', '00:00')
+        data.get('arrival_time', '00:00'),
+        data.get('notes', ''),
+        data.get('vitals', {}).get('bp', ''),
+        str(data.get('vitals', {}).get('hr', 0)),
+        str(data.get('vitals', {}).get('spo2', 0)),
+        str(data.get('vitals', {}).get('temp', 0.0))
     ]
     result = run_engine("add", args)
     notify_clients()
@@ -57,6 +63,25 @@ def get_patient(id):
 @app.route('/api/patients/<id>', methods=['DELETE'])
 def delete_patient(id):
     result = run_engine("delete", [id])
+    notify_clients()
+    return jsonify(result)
+@app.route('/api/patients/<id>', methods=['PUT'])
+def update_patient(id):
+    data = request.json
+    args = [
+        id,
+        data.get('name', 'Unknown'),
+        str(data.get('age', 0)),
+        data.get('gender', 'M'),
+        data.get('chief_complaint', ''),
+        data.get('severity', 'Stable'),
+        data.get('notes', ''),
+        data.get('vitals', {}).get('bp', ''),
+        str(data.get('vitals', {}).get('hr', 0)),
+        str(data.get('vitals', {}).get('spo2', 0)),
+        str(data.get('vitals', {}).get('temp', 0.0))
+    ]
+    result = run_engine("update", args)
     notify_clients()
     return jsonify(result)
 
@@ -96,6 +121,23 @@ def discharge_bed():
 def get_alerts():
     alerts = run_engine("alerts")
     return jsonify(alerts)
+
+@app.route('/api/search', methods=['GET'])
+def search_patients():
+    mode = request.args.get('mode', 'id')
+    query = request.args.get('q', '')
+    if mode == 'id':
+        result = run_engine("search", ["id", query])
+    else:
+        start = request.args.get('start', 'A')
+        end = request.args.get('end', 'Z')
+        result = run_engine("search", ["name", start, end])
+    return jsonify(result)
+
+@app.route('/api/patients/<id>/wait_time', methods=['GET'])
+def get_wait_time(id):
+    result = run_engine("predict_wait_time", [id])
+    return jsonify(result)
 
 @app.route('/api/dsa/avl', methods=['GET'])
 def get_avl():

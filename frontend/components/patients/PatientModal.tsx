@@ -58,12 +58,12 @@ export function PatientModal({ open, onClose, patient }: Props) {
             <div className="grid grid-cols-2 gap-3">
               <div className="col-span-2">
                 <label className="block text-xs font-medium text-foreground mb-1">Full Name *</label>
-                <input required value={form.name} onChange={e => set("name", e.target.value)}
+                <input required value={form.name || ""} onChange={e => set("name", e.target.value)}
                   className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring" />
               </div>
               <div>
                 <label className="block text-xs font-medium text-foreground mb-1">Age *</label>
-                <input required type="number" min={0} max={120} value={form.age} onChange={e => set("age", +e.target.value)}
+                <input required type="number" min={0} max={120} value={form.age || ""} onChange={e => set("age", +e.target.value)}
                   className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring" />
               </div>
               <div>
@@ -76,7 +76,7 @@ export function PatientModal({ open, onClose, patient }: Props) {
               </div>
               <div className="col-span-2">
                 <label className="block text-xs font-medium text-foreground mb-1">Chief Complaint *</label>
-                <input required value={form.chief_complaint} onChange={e => set("chief_complaint", e.target.value)}
+                <input required value={form.chief_complaint || ""} onChange={e => set("chief_complaint", e.target.value)}
                   className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring" />
               </div>
               <div>
@@ -140,7 +140,7 @@ export function PatientModal({ open, onClose, patient }: Props) {
           {/* Notes */}
           <div>
             <label className="block text-xs font-medium text-foreground mb-1">Clinical Notes</label>
-            <textarea rows={3} value={form.notes} onChange={e => set("notes", e.target.value)}
+            <textarea rows={3} value={form.notes || ""} onChange={e => set("notes", e.target.value)}
               className="w-full px-3 py-2 text-sm border border-input rounded-md bg-background focus:outline-none focus:ring-2 focus:ring-ring resize-none" />
           </div>
 

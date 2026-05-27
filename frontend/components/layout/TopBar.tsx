@@ -1,5 +1,5 @@
 "use client";
-import { Bell, Clock, RefreshCw, CheckCircle2, AlertCircle } from "lucide-react";
+import { Bell, Clock, RefreshCw, CheckCircle2, AlertCircle, Undo } from "lucide-react";
 import Link from "next/link";
 import { useERStore } from "@/lib/store";
 import { useEffect, useState } from "react";
@@ -13,9 +13,20 @@ interface TopBarProps {
 }
 
 export function TopBar({ title, subtitle, actions }: TopBarProps) {
-  const { alerts, syncStatus, lastSynced, currentUser } = useERStore();
+  const { alerts, syncStatus, lastSynced, currentUser, undoAction } = useERStore();
   const unread = alerts.filter((a) => !a.read).length;
   const [time, setTime] = useState("");
+
+  const handleUndo = async () => {
+    try {
+      const result = await undoAction();
+      if (result?.restored_action) {
+        // Optional: you could add a toast here. For now, it silently succeeds.
+      }
+    } catch (e: any) {
+      alert(e.message || "Failed to undo");
+    }
+  };
 
   useEffect(() => {
     const tick = () => {
@@ -58,6 +69,9 @@ export function TopBar({ title, subtitle, actions }: TopBarProps) {
 
         <div className="flex items-center gap-2">
           {actions}
+          <button onClick={handleUndo} title="Undo Last Action" className="relative p-1.5 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors border border-border">
+            <Undo className="w-4.5 h-4.5" />
+          </button>
           <ThemeToggle />
           <Link href="/alerts" className="relative p-1.5 rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors border border-border">
             <Bell className="w-4.5 h-4.5" />

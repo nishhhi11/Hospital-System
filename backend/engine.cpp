@@ -42,6 +42,7 @@ struct Patient {
     std::string arrival_time;
     std::string status;
     std::string doctor = "Unassigned";
+    std::string chief_complaint = "";
     std::string notes = "";
     std::string assigned_bed = "";
     Vitals vitals;
@@ -101,22 +102,21 @@ class AVLTree {
 
     AVLNode* insert(AVLNode* node, std::shared_ptr<Patient> p) {
         if (!node) return new AVLNode(p);
-        if (p->id < node->patient->id)
+        if (p->getPriority() < node->patient->getPriority())
             node->left = insert(node->left, p);
-        else if (p->id > node->patient->id)
+        else 
             node->right = insert(node->right, p);
-        else return node;
 
         node->height = 1 + std::max(height(node->left), height(node->right));
         int balance = getBalance(node);
 
-        if (balance > 1 && p->id < node->left->patient->id) return rotateRight(node);
-        if (balance < -1 && p->id > node->right->patient->id) return rotateLeft(node);
-        if (balance > 1 && p->id > node->left->patient->id) {
+        if (balance > 1 && p->getPriority() < node->left->patient->getPriority()) return rotateRight(node);
+        if (balance < -1 && p->getPriority() >= node->right->patient->getPriority()) return rotateLeft(node);
+        if (balance > 1 && p->getPriority() >= node->left->patient->getPriority()) {
             node->left = rotateLeft(node->left);
             return rotateRight(node);
         }
-        if (balance < -1 && p->id < node->right->patient->id) {
+        if (balance < -1 && p->getPriority() < node->right->patient->getPriority()) {
             node->right = rotateRight(node->right);
             return rotateLeft(node);
         }
@@ -136,14 +136,19 @@ public:
 
 class TriageHeap {
     std::vector<std::shared_ptr<Patient>> heap;
+    bool compare(std::shared_ptr<Patient> a, std::shared_ptr<Patient> b) {
+        if (a->getPriority() != b->getPriority()) return a->getPriority() > b->getPriority();
+        if (a->age != b->age) return a->age > b->age;
+        return a->arrival_time < b->arrival_time;
+    }
     void heapifyUp(int i) {
-        while (i > 0 && heap[i]->getPriority() > heap[(i-1)/2]->getPriority()) { std::swap(heap[i], heap[(i-1)/2]); i = (i-1)/2; }
+        while (i > 0 && compare(heap[i], heap[(i-1)/2])) { std::swap(heap[i], heap[(i-1)/2]); i = (i-1)/2; }
     }
     void heapifyDown(int i) {
         int largest = i;
         int l = 2*i + 1, r = 2*i + 2;
-        if (l < heap.size() && heap[l]->getPriority() > heap[largest]->getPriority()) largest = l;
-        if (r < heap.size() && heap[r]->getPriority() > heap[largest]->getPriority()) largest = r;
+        if (l < heap.size() && compare(heap[l], heap[largest])) largest = l;
+        if (r < heap.size() && compare(heap[r], heap[largest])) largest = r;
         if (largest != i) { std::swap(heap[i], heap[largest]); heapifyDown(largest); }
     }
 public:
@@ -151,6 +156,7 @@ public:
     const std::vector<std::shared_ptr<Patient>>& getAll() const { return heap; }
     std::shared_ptr<Patient> find(std::string id) { for (auto& p : heap) if (p->id == id) return p; return nullptr; }
     void clear() { heap.clear(); }
+    void rebuild() { for (int i = heap.size() / 2 - 1; i >= 0; i--) heapifyDown(i); }
 };
 
 TriageHeap triage;
@@ -166,6 +172,18 @@ void initBeds() {
         {"G-05", "General 5", "General", "Available", "", 3}, {"G-06", "General 6", "General", "Available", "", 3}, {"G-07", "General 7", "General", "Available", "", 3}, {"G-08", "General 8", "General", "Available", "", 3},
         {"O-01", "Observation 1", "Observation", "Available", "", 4}, {"O-02", "Observation 2", "Observation", "Available", "", 4}, {"O-03", "Observation 3", "Observation", "Available", "", 4}, {"O-04", "Observation 4", "Observation", "Available", "", 4}
     };
+}
+
+bool dfs_assign_bed(std::shared_ptr<Patient> p, int current_floor) {
+    if (current_floor > 4) return false;
+    for (auto& bed : beds) {
+        if (bed.floor == current_floor && bed.status == "Available") {
+            p->assigned_bed = bed.id;
+            p->status = "In Treatment";
+            return true;
+        }
+    }
+    return dfs_assign_bed(p, current_floor + 1);
 }
 
 void updateBedStates() {
@@ -224,11 +242,15 @@ void pushUndo(std::string type, std::shared_ptr<Patient> p, std::string old_val 
 void load() {
     std::ifstream in("patients.db");
     if (!in) return;
-    std::string id, name, gender, severity, arrival, status, bed;
-    int age;
-    while (in >> id >> std::quoted(name) >> age >> gender >> severity >> arrival >> std::quoted(status) >> bed) {
+    std::string id, name, gender, severity, arrival, status, bed, cc, doc, notes, bp;
+    int age, hr, spo2;
+    float temp;
+    while (in >> id >> std::quoted(name) >> age >> gender >> severity >> arrival >> std::quoted(status) >> bed >> std::quoted(cc) >> std::quoted(doc) >> std::quoted(notes) >> std::quoted(bp) >> hr >> spo2 >> temp) {
         auto p = std::make_shared<Patient>();
-        p->id = id; p->name = name; p->age = age; p->gender = gender; p->severity = stringToSeverity(severity); p->arrival_time = arrival; p->status = status; p->assigned_bed = (bed == "none" ? "" : bed);
+        p->id = id; p->name = name; p->age = age; p->gender = gender; p->severity = stringToSeverity(severity); 
+        p->arrival_time = arrival; p->status = status; p->assigned_bed = (bed == "none" ? "" : bed);
+        p->chief_complaint = cc; p->doctor = doc; p->notes = notes; 
+        p->vitals.bp = bp; p->vitals.hr = hr; p->vitals.spo2 = spo2; p->vitals.temp = temp;
         triage.push(p); registry.add(p);
     }
     updateBedStates(); generateAlerts();
@@ -237,7 +259,7 @@ void load() {
 void save() {
     std::ofstream out("patients.db");
     for (auto& p : triage.getAll()) {
-        out << p->id << " " << std::quoted(p->name) << " " << p->age << " " << p->gender << " " << severityToString(p->severity) << " " << p->arrival_time << " " << std::quoted(p->status) << " " << (p->assigned_bed.empty() ? "none" : p->assigned_bed) << "\n";
+        out << p->id << " " << std::quoted(p->name) << " " << p->age << " " << p->gender << " " << severityToString(p->severity) << " " << p->arrival_time << " " << std::quoted(p->status) << " " << (p->assigned_bed.empty() ? "none" : p->assigned_bed) << " " << std::quoted(p->chief_complaint) << " " << std::quoted(p->doctor) << " " << std::quoted(p->notes) << " " << std::quoted(p->vitals.bp) << " " << p->vitals.hr << " " << p->vitals.spo2 << " " << p->vitals.temp << "\n";
     }
 }
 
@@ -362,13 +384,20 @@ int main(int argc, char* argv[]) {
     
     try {
         if (cmd == "add") {
-            if (!checkArgs(argc, 8, "add")) return 1;
+            if (!checkArgs(argc, 14, "add")) return 1;
             auto p = std::make_shared<Patient>();
-            p->id = argv[2]; p->name = argv[3]; p->age = std::stoi(argv[4]); p->gender = argv[5]; p->severity = stringToSeverity(argv[6]); p->arrival_time = argv[7]; p->status = "Waiting";
-            for (auto& bed : beds) { if (bed.status == "Available") { p->assigned_bed = bed.id; p->status = "In Treatment"; break; } }
+            p->id = argv[2]; p->name = argv[3]; p->age = std::stoi(argv[4]); p->gender = argv[5]; p->chief_complaint = argv[6]; p->severity = stringToSeverity(argv[7]); p->arrival_time = argv[8]; p->notes = argv[9]; p->vitals.bp = argv[10]; p->vitals.hr = std::stoi(argv[11]); p->vitals.spo2 = std::stoi(argv[12]); p->vitals.temp = std::stof(argv[13]); p->status = "Waiting";
+            dfs_assign_bed(p, 1);
             pushUndo("ADD", p);
             triage.push(p); registry.add(p); save();
             std::cout << "{\"status\":\"success\"}" << std::endl;
+        } else if (cmd == "update") {
+            if (!checkArgs(argc, 13, "update")) return 1;
+            auto p = triage.find(argv[2]);
+            if (p) {
+                p->name = argv[3]; p->age = std::stoi(argv[4]); p->gender = argv[5]; p->chief_complaint = argv[6]; p->severity = stringToSeverity(argv[7]); p->notes = argv[8]; p->vitals.bp = argv[9]; p->vitals.hr = std::stoi(argv[10]); p->vitals.spo2 = std::stoi(argv[11]); p->vitals.temp = std::stof(argv[12]);
+                save(); std::cout << "{\"status\":\"success\"}" << std::endl;
+            } else { std::cout << "{\"error\":\"Not found\"}" << std::endl; }
         } else if (cmd == "add_event") {
             if (!checkArgs(argc, 13, "add_event")) return 1;
             auto e = std::make_shared<MedicalEvent>();
@@ -379,21 +408,41 @@ int main(int argc, char* argv[]) {
             std::cout << "{\"status\":\"success\"}" << std::endl;
         } else if (cmd == "get_events") {
             auto events = alertQueue.getAll();
+            std::vector<std::shared_ptr<MedicalEvent>> valid_events;
+            bool needed_cleanup = false;
+            for (auto& e : events) {
+                auto p = triage.find(e->patient_id);
+                if (p) {
+                    if (e->patient_name != p->name) {
+                        e->patient_name = p->name;
+                        needed_cleanup = true;
+                    }
+                    valid_events.push_back(e);
+                } else {
+                    needed_cleanup = true;
+                }
+            }
+            if (needed_cleanup) {
+                alertQueue.clear();
+                for (auto& e : valid_events) alertQueue.push(e);
+                saveEvents();
+            }
+            
             // Sort to output exact heap Priority Order
-            std::sort(events.begin(), events.end(), [](const std::shared_ptr<MedicalEvent>& a, const std::shared_ptr<MedicalEvent>& b) {
+            std::sort(valid_events.begin(), valid_events.end(), [](const std::shared_ptr<MedicalEvent>& a, const std::shared_ptr<MedicalEvent>& b) {
                 if (a->getPriorityLevel() != b->getPriorityLevel()) return a->getPriorityLevel() < b->getPriorityLevel();
                 if (a->date != b->date) return a->date < b->date;
                 return a->time < b->time;
             });
             std::cout << "[";
-            for (size_t i = 0; i < events.size(); ++i) {
-                std::cout << "{" << "\"id\":\"" << events[i]->id << "\"," << "\"patient_id\":\"" << events[i]->patient_id << "\"," 
-                          << "\"patient_name\":\"" << events[i]->patient_name << "\"," << "\"type\":\"" << events[i]->type << "\"," 
-                          << "\"title\":\"" << events[i]->title << "\"," << "\"date\":\"" << events[i]->date << "\"," 
-                          << "\"time\":\"" << events[i]->time << "\"," << "\"priority\":\"" << severityToString(events[i]->priority) << "\"," 
-                          << "\"department\":\"" << events[i]->department << "\"," << "\"doctor\":\"" << events[i]->doctor << "\"," 
-                          << "\"status\":\"" << events[i]->status << "\"}";
-                if (i < events.size() - 1) std::cout << ",";
+            for (size_t i = 0; i < valid_events.size(); ++i) {
+                std::cout << "{" << "\"id\":\"" << valid_events[i]->id << "\"," << "\"patient_id\":\"" << valid_events[i]->patient_id << "\"," 
+                          << "\"patient_name\":\"" << valid_events[i]->patient_name << "\"," << "\"type\":\"" << valid_events[i]->type << "\"," 
+                          << "\"title\":\"" << valid_events[i]->title << "\"," << "\"date\":\"" << valid_events[i]->date << "\"," 
+                          << "\"time\":\"" << valid_events[i]->time << "\"," << "\"priority\":\"" << severityToString(valid_events[i]->priority) << "\"," 
+                          << "\"department\":\"" << valid_events[i]->department << "\"," << "\"doctor\":\"" << valid_events[i]->doctor << "\"," 
+                          << "\"status\":\"" << valid_events[i]->status << "\"}";
+                if (i < valid_events.size() - 1) std::cout << ",";
             }
             std::cout << "]" << std::endl;
         } else if (cmd == "delete_event") {
@@ -419,7 +468,7 @@ int main(int argc, char* argv[]) {
             });
             std::cout << "[";
             for (size_t i = 0; i < patients.size(); ++i) {
-                std::cout << "{" << "\"id\":\"" << patients[i]->id << "\"," << "\"name\":\"" << patients[i]->name << "\"," << "\"age\":" << patients[i]->age << "," << "\"gender\":\"" << patients[i]->gender << "\"," << "\"severity\":\"" << severityToString(patients[i]->severity) << "\"," << "\"arrival_time\":\"" << patients[i]->arrival_time << "\"," << "\"status\":\"" << patients[i]->status << "\"," << "\"doctor\":\"" << patients[i]->doctor << "\"," << "\"notes\":\"" << patients[i]->notes << "\"," << "\"assigned_bed\":\"" << patients[i]->assigned_bed << "\"," << "\"vitals\":{" << "\"bp\":\"" << patients[i]->vitals.bp << "\"," << "\"hr\":" << patients[i]->vitals.hr << "," << "\"spo2\":" << patients[i]->vitals.spo2 << "," << "\"temp\":" << patients[i]->vitals.temp << "}}";
+                std::cout << "{" << "\"id\":\"" << patients[i]->id << "\"," << "\"name\":\"" << patients[i]->name << "\"," << "\"age\":" << patients[i]->age << "," << "\"gender\":\"" << patients[i]->gender << "\"," << "\"chief_complaint\":\"" << patients[i]->chief_complaint << "\"," << "\"severity\":\"" << severityToString(patients[i]->severity) << "\"," << "\"arrival_time\":\"" << patients[i]->arrival_time << "\"," << "\"status\":\"" << patients[i]->status << "\"," << "\"doctor\":\"" << patients[i]->doctor << "\"," << "\"notes\":\"" << patients[i]->notes << "\"," << "\"assigned_bed\":\"" << patients[i]->assigned_bed << "\"," << "\"vitals\":{" << "\"bp\":\"" << patients[i]->vitals.bp << "\"," << "\"hr\":" << patients[i]->vitals.hr << "," << "\"spo2\":" << patients[i]->vitals.spo2 << "," << "\"temp\":" << patients[i]->vitals.temp << "}}";
                 if (i < patients.size() - 1) std::cout << ",";
             }
             std::cout << "]" << std::endl;
@@ -462,13 +511,60 @@ int main(int argc, char* argv[]) {
         } else if (cmd == "get") {
             if (!checkArgs(argc, 3, "get")) return 1;
             auto p = triage.find(argv[2]);
-            if (p) std::cout << "{" << "\"id\":\"" << p->id << "\"," << "\"name\":\"" << p->name << "\"," << "\"age\":" << p->age << "," << "\"gender\":\"" << p->gender << "\"," << "\"severity\":\"" << severityToString(p->severity) << "\"," << "\"arrival_time\":\"" << p->arrival_time << "\"," << "\"status\":\"" << p->status << "\"," << "\"doctor\":\"" << p->doctor << "\"," << "\"notes\":\"" << p->notes << "\"," << "\"assigned_bed\":\"" << p->assigned_bed << "\"," << "\"vitals\":{" << "\"bp\":\"" << p->vitals.bp << "\"," << "\"hr\":" << p->vitals.hr << "," << "\"spo2\":" << p->vitals.spo2 << "," << "\"temp\":" << p->vitals.temp << "}}" << std::endl;
+            if (p) std::cout << "{" << "\"id\":\"" << p->id << "\"," << "\"name\":\"" << p->name << "\"," << "\"age\":" << p->age << "," << "\"gender\":\"" << p->gender << "\"," << "\"chief_complaint\":\"" << p->chief_complaint << "\"," << "\"severity\":\"" << severityToString(p->severity) << "\"," << "\"arrival_time\":\"" << p->arrival_time << "\"," << "\"status\":\"" << p->status << "\"," << "\"doctor\":\"" << p->doctor << "\"," << "\"notes\":\"" << p->notes << "\"," << "\"assigned_bed\":\"" << p->assigned_bed << "\"," << "\"vitals\":{" << "\"bp\":\"" << p->vitals.bp << "\"," << "\"hr\":" << p->vitals.hr << "," << "\"spo2\":" << p->vitals.spo2 << "," << "\"temp\":" << p->vitals.temp << "}}" << std::endl;
             else std::cout << "{\"error\":\"Not found\"}" << std::endl;
         } else if (cmd == "update_severity") {
             if (!checkArgs(argc, 4, "update_severity")) return 1;
             auto p = triage.find(argv[2]);
-            if (p) { pushUndo("UPDATE_SEVERITY", p, severityToString(p->severity)); p->severity = stringToSeverity(argv[3]); save(); std::cout << "{\"status\":\"success\"}" << std::endl; }
+            if (p) { pushUndo("UPDATE_SEVERITY", p, severityToString(p->severity)); p->severity = stringToSeverity(argv[3]); triage.rebuild(); save(); std::cout << "{\"status\":\"success\"}" << std::endl; }
             else std::cout << "{\"error\":\"Not found\"}" << std::endl;
+        } else if (cmd == "search") {
+            if (!checkArgs(argc, 4, "search")) return 1;
+            std::string mode = argv[2];
+            std::vector<std::shared_ptr<Patient>> all = triage.getAll();
+            std::vector<std::shared_ptr<Patient>> results;
+            if (mode == "id") {
+                std::sort(all.begin(), all.end(), [](auto a, auto b) { return a->id < b->id; });
+                int l = 0, r = all.size() - 1;
+                while (l <= r) {
+                    int m = l + (r - l) / 2;
+                    if (all[m]->id == argv[3]) { results.push_back(all[m]); break; }
+                    if (all[m]->id < argv[3]) l = m + 1;
+                    else r = m - 1;
+                }
+            } else if (mode == "name") {
+                if (!checkArgs(argc, 5, "search")) return 1;
+                std::string start_char = argv[3];
+                std::string end_char = argv[4];
+                for (auto& p : all) {
+                    if (p->name >= start_char && p->name <= end_char) results.push_back(p);
+                }
+            }
+            std::cout << "[";
+            for (size_t i = 0; i < results.size(); ++i) {
+                std::cout << "{" << "\"id\":\"" << results[i]->id << "\"," << "\"name\":\"" << results[i]->name << "\"," << "\"severity\":\"" << severityToString(results[i]->severity) << "\"}";
+                if (i < results.size() - 1) std::cout << ",";
+            }
+            std::cout << "]" << std::endl;
+        } else if (cmd == "predict_wait_time") {
+            if (!checkArgs(argc, 3, "predict_wait_time")) return 1;
+            std::string id = argv[2];
+            auto all = triage.getAll();
+            std::sort(all.begin(), all.end(), [](auto a, auto b) {
+                if (a->getPriority() != b->getPriority()) return a->getPriority() > b->getPriority();
+                if (a->age != b->age) return a->age > b->age;
+                return a->arrival_time < b->arrival_time;
+            });
+            int pos = -1;
+            for (size_t i = 0; i < all.size(); i++) {
+                if (all[i]->id == id) { pos = i; break; }
+            }
+            if (pos != -1) {
+                int wait_time = pos * 15 + 5;
+                std::cout << "{\"wait_time\":" << wait_time << "}" << std::endl;
+            } else {
+                std::cout << "{\"error\":\"Not found\"}" << std::endl;
+            }
         } else if (cmd == "delete") {
             if (!checkArgs(argc, 3, "delete")) return 1;
             std::string target_id = argv[2];
