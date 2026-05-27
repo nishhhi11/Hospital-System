@@ -23,7 +23,6 @@ const NAV_ITEMS = [
   { href: "/triage", label: "Triage Queue", icon: ListOrdered },
   { href: "/beds", label: "Bed Allocation", icon: BedDouble },
   { href: "/analytics", label: "Analytics", icon: BarChart2 },
-  { href: "/dsa", label: "System Logic Monitor", icon: GitBranch },
   { href: "/alerts", label: "Alerts", icon: Bell },
   { href: "/settings", label: "Settings", icon: Settings },
 ];
