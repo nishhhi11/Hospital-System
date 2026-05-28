@@ -1,4 +1,5 @@
-ADD P1779095900 "nishi" 30 M Moderate 14:48 "In Treatment" T-02 "none"
 DISCHARGE_BED P1779059601 "Sara Khan" 22 F Stable 08:15 "Observation" T-03 "T-03"
 ADD P1779878150 "Nandeni" 20 F Moderate 16:05 "In Treatment" T-03 "none"
 ADD P1779943387 "Nishi Chopda" 19 F Moderate 10:12 "In Treatment" T-01 "none"
+DISCHARGE_BED P1779878384 "Arjun Mehta" 45 M Critical 16:14 "Emergency" T-02 "T-02"
+ASSIGN_BED P1779878384 "Arjun Mehta" 45 M Critical 16:14 "Waiting" none ""

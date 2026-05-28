@@ -7,9 +7,11 @@ import { SeverityBadge } from "@/components/ui/SeverityBadge";
 import { PatientModal } from "@/components/patients/PatientModal";
 import {
   ArrowUp, ArrowDown, Clock, Heart, Droplets, Thermometer, Wind,
-  ChevronRight, Edit2, UserPlus, Activity,
+  ChevronRight, Edit2, UserPlus, Activity, Download, IndianRupee,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+import jsPDF from "jspdf";
+import autoTable from "jspdf-autotable";
 
 const SEVERITY_LEVELS: Severity[] = ["Critical", "Urgent", "Moderate", "Stable"];
 
@@ -41,6 +43,109 @@ export default function TriagePage() {
     if (key === "spo2") return val < 90 ? "text-red-600" : val < 95 ? "text-orange-600" : "text-green-600";
     if (key === "temp") return val > 39 ? "text-red-600" : val > 38 ? "text-orange-600" : "text-foreground";
     return "text-foreground";
+  };
+
+  const getBillingDetails = (p: Patient) => {
+    const baseFee = 5000;
+    const severityFees = { Critical: 20000, Urgent: 10000, Moderate: 5000, Stable: 2000 };
+    const severityFee = severityFees[p.severity];
+    const bedFee = (p.status === "In Treatment" || p.status === "Admitted") ? 15000 : 0;
+    const total = baseFee + severityFee + bedFee;
+    return { baseFee, severityFee, bedFee, total };
+  };
+
+  const handleDownloadReport = () => {
+    if (!selected) return;
+    const bill = getBillingDetails(selected);
+    const score = getPriorityScore(selected);
+    
+    const doc = new jsPDF();
+    
+    // Header
+    doc.setFont("helvetica", "bold");
+    doc.setFontSize(20);
+    doc.text("PULSEGRID EMERGENCY DEPARTMENT", 105, 20, { align: "center" });
+    
+    doc.setFontSize(10);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Generated: ${new Date().toLocaleString()}`, 105, 28, { align: "center" });
+    
+    doc.setLineWidth(0.5);
+    doc.line(14, 32, 196, 32);
+
+    // Patient Demographics
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("Patient Demographics", 14, 45);
+    
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Name: ${selected.name}`, 14, 55);
+    doc.text(`ID: ${selected.id}`, 14, 62);
+    doc.text(`Age/Gender: ${selected.age} yrs / ${selected.gender === "M" ? "Male" : "Female"}`, 120, 55);
+    
+    // Clinical Triage
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("Clinical Triage", 14, 75);
+    
+    doc.setFontSize(11);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Severity: ${selected.severity} (Score: ${score})`, 14, 85);
+    doc.text(`Arrival: ${selected.arrival_time}`, 120, 85);
+    doc.text(`Status: ${selected.status}`, 14, 92);
+    doc.text(`Attending: ${selected.doctor || "Unassigned"}`, 120, 92);
+    
+    doc.text(`Chief Complaint:`, 14, 102);
+    doc.setFont("helvetica", "italic");
+    const splitComplaint = doc.splitTextToSize(selected.chief_complaint || "None", 180);
+    doc.text(splitComplaint, 14, 109);
+    
+    const noteY = 109 + (splitComplaint.length * 6);
+    doc.setFont("helvetica", "normal");
+    doc.text(`Clinical Notes:`, 14, noteY + 5);
+    doc.setFont("helvetica", "italic");
+    const splitNotes = doc.splitTextToSize(selected.notes || "No notes recorded.", 180);
+    doc.text(splitNotes, 14, noteY + 12);
+    
+    let currentY = noteY + 12 + (splitNotes.length * 6) + 10;
+    
+    // Vitals Table
+    autoTable(doc, {
+      startY: currentY,
+      head: [['Blood Pressure', 'Heart Rate', 'SpO2', 'Temperature']],
+      body: [[
+        selected.vitals.bp,
+        `${selected.vitals.hr} bpm`,
+        `${selected.vitals.spo2}%`,
+        `${selected.vitals.temp} C`
+      ]],
+      theme: 'grid',
+      headStyles: { fillColor: [41, 128, 185] }
+    });
+    
+    currentY = (doc as any).lastAutoTable.finalY + 15;
+    
+    // Estimated Billing Table
+    doc.setFontSize(14);
+    doc.setFont("helvetica", "bold");
+    doc.text("Estimated Billing Details", 14, currentY);
+    
+    autoTable(doc, {
+      startY: currentY + 5,
+      head: [['Description', 'Amount (INR)']],
+      body: [
+        ['Base ER Intake Fee', `Rs. ${bill.baseFee.toFixed(2)}`],
+        [`Severity Surcharge (${selected.severity})`, `Rs. ${bill.severityFee.toFixed(2)}`],
+        ['Bed / Facility Charge', `Rs. ${bill.bedFee.toFixed(2)}`]
+      ],
+      foot: [['TOTAL ESTIMATED COST', `Rs. ${bill.total.toFixed(2)}`]],
+      theme: 'grid',
+      headStyles: { fillColor: [46, 204, 113] },
+      footStyles: { fillColor: [240, 240, 240], textColor: [0,0,0], fontStyle: 'bold' }
+    });
+
+    doc.save(`PulseGrid_Report_${selected.name.replace(/\s+/g, "_")}.pdf`);
   };
 
   return (
@@ -141,12 +246,20 @@ export default function TriagePage() {
                     {selected.gender === "M" ? "Male" : "Female"}, {selected.age} years old &middot; ID: {selected.id}
                   </p>
                 </div>
-                <button
-                  onClick={() => { setEditPatient(selected); setModalOpen(true); }}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-border rounded-md hover:bg-muted transition-colors"
-                >
-                  <Edit2 className="w-3.5 h-3.5" /> Edit
-                </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={handleDownloadReport}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-border rounded-md hover:bg-muted transition-colors"
+                  >
+                    <Download className="w-3.5 h-3.5" /> Report
+                  </button>
+                  <button
+                    onClick={() => { setEditPatient(selected); setModalOpen(true); }}
+                    className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium border border-border rounded-md hover:bg-muted transition-colors"
+                  >
+                    <Edit2 className="w-3.5 h-3.5" /> Edit
+                  </button>
+                </div>
               </div>
 
               {/* Vitals */}
@@ -202,6 +315,37 @@ export default function TriagePage() {
                     <div className="text-sm font-bold text-primary">{getPriorityScore(selected)}</div>
                   </div>
                 </div>
+              </div>
+
+              {/* Estimated Billing */}
+              <div className="bg-card border border-border rounded-xl p-4">
+                <div className="flex items-center gap-2 mb-3">
+                  <IndianRupee className="w-4 h-4 text-green-600" />
+                  <h3 className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Estimated Billing</h3>
+                </div>
+                {(() => {
+                  const bill = getBillingDetails(selected);
+                  return (
+                    <div className="space-y-2 text-sm text-foreground">
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Base Intake Fee</span>
+                        <span>₹{bill.baseFee.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <span className="text-muted-foreground">Severity Surcharge ({selected.severity})</span>
+                        <span>₹{bill.severityFee.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between border-b border-border pb-2">
+                        <span className="text-muted-foreground">Bed/Facility Charge</span>
+                        <span>₹{bill.bedFee.toFixed(2)}</span>
+                      </div>
+                      <div className="flex justify-between pt-1 font-bold">
+                        <span>Total Estimated Cost</span>
+                        <span className="text-primary">₹{bill.total.toFixed(2)}</span>
+                      </div>
+                    </div>
+                  );
+                })()}
               </div>
 
               {/* Severity Update */}

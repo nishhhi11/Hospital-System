@@ -1,5 +1,5 @@
 P1779878392 "Dev Malhotra" 66 M Critical 17:10 "Emergency" T-10 "Cardiac Arrest" "Dr. Sharma" "CPR" "180/120" 132 79 40
-P1779878384 "Arjun Mehta" 45 M Critical 16:14 "Emergency" T-02 "Chest Pain" "Dr. Sharma" "ECG Required" "150/95" 118 92 39
+P1779878384 "Arjun Mehta" 45 M Critical 16:14 "In Treatment" O-02 "Chest Pain" "Dr. Sharma" "ECG Required" "150/95" 118 92 39
 P1779878388 "Kabir Sharma" 35 M Critical 16:42 "Surgery Required" T-06 "Internal Injury" "Dr. Mehra" "CT Scan" "160/100" 125 85 39
 P1779878387 "Anaya Singh" 27 F Moderate 16:35 "Under Review" T-05 "Migraine" "Unassigned" "Hydration" "118/76" 76 99 37
 P1779943387 "Nishi Chopda" 19 F Moderate 10:12 "In Treatment" T-01 "HeadAche" "Unassigned" "Dolo" "120/80" 72 99 37
